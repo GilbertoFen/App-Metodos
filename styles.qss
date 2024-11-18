@@ -1,0 +1,168 @@
+/* Estilo para la ventana principal */
+QWidget {
+    background-color: #2C2F33;
+    color: #FFFFFF;
+
+    font-size: 14px;
+}
+
+/* Estilo para los botones personalizados */
+#customButton {
+    background-color: #7289DA;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+#customButton:hover {
+    background-color: #5B6EAE;
+}
+
+#customButton:pressed {
+    background-color: #4E5D8A;
+}
+
+/* Estilo para el botón de regresar */
+#backButton {
+       background-color: #7289DA;
+       font-weight: bold;
+       color: #fff;
+       border-radius: 10px;
+       font-size: 16px;
+       padding: 15px;
+       margin: 10px;
+}
+
+#backButton:hover {
+    background-color: #5B6EAE;
+}
+
+#backButton:pressed {
+    background-color: #4E5D8A;
+}
+
+/* Estilo para los QLineEdit (entradas de texto) */
+QLineEdit {
+    background-color: #23272A;
+    color: #FFFFFF;
+    border: 1px solid #7289DA;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #99AAB5;
+}
+
+/* Estilo para los QLabel */
+QLabel {
+    font-weight: bold;
+    color: #99AAB5;
+}
+
+/* Estilo para los QTextEdit (área de texto grande) */
+QTextEdit {
+    background-color: #2F3136;
+    color: #FFFFFF;
+    border: 1px solid #7289DA;
+    border-radius: 5px;
+}
+
+/* Estilo para QScrollArea */
+QScrollArea {
+    background-color: #2C2F33;
+    border: none;
+}
+
+/* Barras de desplazamiento */
+QScrollBar:vertical {
+    background-color: #23272A;
+    width: 12px;
+    margin: 15px 3px 15px 3px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #7289DA;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #5B6EAE;
+}
+
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:vertical {
+    height: 0;
+    border: none;
+}
+#Title{
+    background-color: #7289DA;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 24px;
+    margin: 0px;  /* Asegúrate de que no haya márgenes */
+    padding: 0px;
+}
+/* Estilos para el QTableWidget */
+QTableWidget {
+    background-color: #1E1E2F;  /* Fondo general */
+    border: 2px solid #3B76A8;  /* Borde de la tabla */
+    color: white;               /* Color del texto */
+    gridline-color: #5B9BD5;    /* Color de las líneas de la cuadrícula */
+    selection-background-color: #4A8AC4; /* Fondo al seleccionar una celda */
+    selection-color: white;     /* Color del texto al seleccionar */
+    font-size: 14px;            /* Tamaño de la fuente */
+    padding: 5px;               /* Espaciado interno */
+}
+
+/* Estilos para el encabezado de la tabla */
+QHeaderView::section {
+    background-color: #3B76A8;  /* Fondo del encabezado */
+    color: white;               /* Color del texto del encabezado */
+    padding: 10px;              /* Espaciado interno */
+    font-weight: bold;          /* Negrita en los encabezados */
+    border: 1px solid #5B9BD5;  /* Borde alrededor del encabezado */
+}
+
+/* Estilos para las celdas individuales */
+QTableWidget::item {
+    padding: 10px;              /* Espaciado interno de cada celda */
+    border: 1px solid #5B9BD5;  /* Borde alrededor de cada celda */
+}
+
+/* Estilos para las celdas seleccionadas */
+QTableWidget::item:selected {
+    background-color: #4A8AC4;  /* Fondo al seleccionar una celda */
+    color: white;               /* Color del texto de las celdas seleccionadas */
+}
+
+/* Botón de esquina superior izquierda (donde se cruzan encabezados) */
+QTableCornerButton::section {
+    background-color: #3B76A8;
+    border: 1px solid #5B9BD5;
+}
+
+#actionButton{
+    background-color: #7289DA;
+    color: #fff;
+    font-weight: bold;
+
+    border-radius: 10px;
+}
+#actionButton:hover{
+    background-color: #5B6EAE;
+}
+
+#actionButton:pressed{
+    background-color: #4E5D8A;
+}
+#descriptionLabel{
+    border-radius:10px;
+    border: 2px solid #3B76A8;
+    color:white;
+
+}
