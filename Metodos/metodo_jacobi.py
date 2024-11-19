@@ -1,6 +1,6 @@
 import numpy as np
 
-def jacobi(A, b, tol=1e-3, max_iter=50):
+def jacobi(A, b, tol=1e-4, max_iter=50):
     n = len(A)
     x = np.zeros(n)
     D = np.diag(np.diag(A))
@@ -14,8 +14,8 @@ def jacobi(A, b, tol=1e-3, max_iter=50):
     spectral_radius = max(abs(np.linalg.eigvals(T)))
 
     # Si el radio espectral es mayor o igual a 1, el método no converge
-    if spectral_radius >= 1:
-        return None, [], spectral_radius, T, [], None
+    """if spectral_radius >= 1:
+        return None, [], spectral_radius, T, [], None"""
 
     # Generar las ecuaciones despejadas para cada variable
     equations = []
@@ -33,12 +33,16 @@ def jacobi(A, b, tol=1e-3, max_iter=50):
     steps = []
     for k in range(max_iter):
         x_new = T @ x + c
-        error = np.linalg.norm(x_new - x)
+        numerator = np.max(np.abs(x_new - x))
+        denominator = np.max(np.abs(x_new))
+        error = numerator / denominator if denominator != 0 else np.inf
+
         steps.append((x_new.copy(), error))
         if error < tol:
             break
         x = x_new
 
     # Verificación final: Ax = b
+
     Ax = A @ x
     return x, steps, spectral_radius, T, equations, Ax

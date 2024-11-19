@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QMessageBox, QScrollArea
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QMessageBox, QScrollArea, QSizePolicy
 from PyQt6.QtCore import Qt
 from utils.matrix_input_widget import MatrixInputWidget
 from utils.html_generator import intercambio_steps_to_html, matrix_result_to_html, vector_to_html_table, comprobacion_to_html
@@ -56,6 +56,10 @@ class IntercambioMethodWindow(QWidget):
         results_scroll_area = QScrollArea()
         results_scroll_area.setWidgetResizable(True)
         results_scroll_area.setWidget(self.results_display)
+        scroll_layout.addWidget(results_scroll_area)
+
+        results_scroll_area.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)
+        results_scroll_area.setMinimumHeight(400)
         scroll_layout.addWidget(results_scroll_area)
 
         scroll_area.setWidget(scroll_content)

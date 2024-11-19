@@ -30,9 +30,9 @@ class SecantMethodWindow(QWidget):
                                   "Luego, la intersección de esta línea con el eje 𝑥  "
                                   "proporciona una nueva aproximación 𝑥𝑛+1.")
         description_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        description_label.setObjectName("descriptionLabel")
         description_label.setWordWrap(True)
         scroll_layout.addWidget(description_label)
+
         # Título
         self.label = QLabel("Método de la secante")
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -41,7 +41,7 @@ class SecantMethodWindow(QWidget):
         # Campo para ingresar la función
         self.function_input = QLineEdit(self)
         self.function_input.setPlaceholderText("Ingresa una función (e.g., x**2 + 2*x + 3)")
-        self.function_input.setStyleSheet("color: white; margin-top: 10px;")
+        self.function_input.textChanged.connect(self.auto_plot_function)  # Conectar aquí
         scroll_layout.addWidget(self.function_input)
 
         # Campo para ingresar el intervalo
@@ -51,12 +51,10 @@ class SecantMethodWindow(QWidget):
 
         self.input_a = QLineEdit(self)
         self.input_a.setPlaceholderText("a")
-        self.input_a.setStyleSheet("color: #8e8e8e;")
         interval_layout.addWidget(self.input_a)
 
         self.input_b = QLineEdit(self)
         self.input_b.setPlaceholderText("b")
-        self.input_b.setStyleSheet("color: #8e8e8e;")
         interval_layout.addWidget(self.input_b)
 
         scroll_layout.addLayout(interval_layout)
@@ -64,13 +62,11 @@ class SecantMethodWindow(QWidget):
         # Botón para graficar la función
         self.graph_button = QPushButton("Graficar función", self)
         self.graph_button.clicked.connect(self.plot_function)
-        self.graph_button.setObjectName("actionButton")
         scroll_layout.addWidget(self.graph_button)
 
         # Botón para ver la tabla de iteraciones
         self.iterations_button = QPushButton("Ver tabla de iteraciones", self)
         self.iterations_button.clicked.connect(self.toggle_iterations)
-        self.iterations_button.setObjectName("actionButton")
         scroll_layout.addWidget(self.iterations_button)
 
         # Campo para la gráfica
@@ -91,6 +87,41 @@ class SecantMethodWindow(QWidget):
         main_layout = QVBoxLayout(self)
         main_layout.addWidget(scroll_area)
         self.setLayout(main_layout)
+
+    def auto_plot_function(self):
+        """
+        Intenta graficar la función automáticamente al escribir en el input.
+        """
+        try:
+            function_text = self.function_input.text()
+
+            # Validar si el texto no está vacío
+            if not function_text.strip():
+                return
+
+            # Convertir el texto a una función válida de SymPy
+            x = sp.symbols('x')
+            func = sp.sympify(function_text)
+            f = sp.lambdify(x, func, modules=["numpy"])
+
+            # Rango predeterminado para graficar
+            x_min, x_max = -10, 10
+            x_vals = np.linspace(x_min, x_max, 400)
+            y_vals = f(x_vals)
+
+            # Verificar si hay valores inválidos (NaN o Inf)
+            if np.any(np.isnan(y_vals)) or np.any(np.isinf(y_vals)):
+                raise ValueError("La función contiene valores inválidos en el rango seleccionado.")
+
+            # Graficar la función automáticamente
+            self.canvas.plot(f)
+        except Exception as e:
+            # Manejar errores sin detener la aplicación
+            self.canvas.ax.clear()
+            self.canvas.ax.text(0.5, 0.5, f"Error: {str(e)}",
+                                ha='center', va='center', transform=self.canvas.ax.transAxes, color='red')
+            self.canvas.draw()
+
 
     def plot_function(self):
         try:

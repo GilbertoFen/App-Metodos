@@ -8,29 +8,28 @@ class SecantPlotCanvas(FigureCanvas):
         self.ax = self.fig.add_subplot(111)
         super(SecantPlotCanvas, self).__init__(self.fig)
 
-    def plot(self, f, a, b, iterations):
-        # Limpiar el eje antes de volver a dibujar
-        self.ax.clear()
+    def plot(self, f, a=None, b=None, iterations=None):
+        self.ax.clear()  # Limpiar el gráfico anterior
 
-        # Obtener los puntos de la gráfica en un intervalo ajustado
-        root = iterations[-1][2]
-        x_vals = np.linspace(root - 5, root + 5, 400)
+        # Rango de x: usar `a` y `b` si se proporcionan, de lo contrario usar predeterminado
+        if a is not None and b is not None:
+            x_vals = np.linspace(a, b, 400)
+        else:
+            x_vals = np.linspace(-10, 10, 400)
+
         y_vals = f(x_vals)
-        # Graficar la función f(x)
+
+        # Verificar si hay valores NaN o Inf
+        if np.any(np.isnan(y_vals)) or np.any(np.isinf(y_vals)):
+            raise ValueError("La función tiene valores inválidos en el rango seleccionado.")
+
         self.ax.plot(x_vals, y_vals, label="f(x)")
+        self.ax.axhline(0, color="black", linestyle="--", linewidth=0.8)
 
-        # Marcar la raíz encontrada en la gráfica
-        self.ax.axvline(root, color='g', linestyle='--', label=f"Raíz encontrada = {root:.6f}")
+        if iterations:
+            root = iterations[-1][2]  # Raíz aproximada
+            self.ax.axvline(root, color='g', linestyle='--', label=f"Raíz: {root:.6f}")
 
-        # Etiquetas y título
-        self.ax.set_xlabel('x')
-        self.ax.set_ylabel('f(x)')
-        self.ax.set_title('Método de la Secante')
+        self.ax.set_title("Gráfica de la función")
         self.ax.legend()
-
-        # Actualizar límites del eje y para que la raíz sea visible
-        self.ax.set_xlim(root - 5, root + 5)
-        self.ax.set_ylim(min(y_vals) - 1, max(y_vals) + 1)
-
-        # Actualizar
         self.draw()

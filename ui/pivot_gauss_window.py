@@ -1,4 +1,5 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QScrollArea, QMessageBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QScrollArea, QMessageBox, \
+    QSizePolicy
 from PyQt6.QtCore import Qt
 import numpy as np
 from utils.matrix_input_widget import MatrixInputWidget
@@ -63,6 +64,10 @@ class PivotGaussWindow(QWidget):
 
         results_scroll_area = QScrollArea()
         results_scroll_area.setWidgetResizable(True)
+        results_scroll_area.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)
+        results_scroll_area.setMinimumHeight(400)
+        scroll_layout.addWidget(results_scroll_area)
+
 
         results_scroll_area.setWidget(self.results_display)
         scroll_layout.addWidget(results_scroll_area)

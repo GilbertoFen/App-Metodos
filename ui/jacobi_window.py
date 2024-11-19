@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QScrollArea, QMessageBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QScrollArea, QMessageBox, QSizePolicy
 from PyQt6.QtCore import Qt
 from utils.matrix_input_widget import MatrixInputWidget
 from utils.html_generator import iterations_to_html, matrix_T_to_html, equations_to_html, vector_to_html_table, vector_comprobacion_table
@@ -58,6 +58,9 @@ class JacobiMethodWindow(QWidget):
         results_scroll_area = QScrollArea()
         results_scroll_area.setWidgetResizable(True)
         results_scroll_area.setWidget(self.results_display)
+
+        results_scroll_area.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding)
+        results_scroll_area.setMinimumHeight(400)
         scroll_layout.addWidget(results_scroll_area)
 
         # Asignar el contenido al área de scroll principal
@@ -78,7 +81,7 @@ class JacobiMethodWindow(QWidget):
 
             if spectral_radius >= 1:
                 QMessageBox.warning(self, "Advertencia", "El método no converge, el radio espectral es mayor o igual a 1.")
-                return
+
 
             # Generar el contenido HTML para los resultados
 

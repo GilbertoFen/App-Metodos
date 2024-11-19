@@ -1,4 +1,5 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QTextEdit, QScrollArea, QMessageBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QTextEdit, QScrollArea, QMessageBox, \
+    QSizePolicy
 from PyQt6.QtCore import Qt
 from utils.matrix_input_widget import MatrixInputWidget
 from utils.html_generator import matrix_to_html_table, vector_to_html_table, vector_comprobacion_table, steps_to_html
@@ -62,6 +63,8 @@ class InversionWindow(QWidget):
         self.steps_display = QTextEdit()
         self.steps_display.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignCenter)
         self.steps_display.setReadOnly(True)
+        self.steps_display.setSizePolicy(QSizePolicy.Policy.Expanding,QSizePolicy.Policy.Expanding )
+        self.steps_display.setMinimumHeight(400)
         main_layout.addWidget(self.steps_display)
 
         # Establecer el layout principal del widget actual

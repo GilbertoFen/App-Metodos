@@ -1,7 +1,6 @@
 import numpy as np
 
 def gauss_jordan_partitioned(A, b):
-
     n = A.shape[0]
 
     # Determinar el tamaño de los bloques en función de n
@@ -12,8 +11,8 @@ def gauss_jordan_partitioned(A, b):
     else:
         raise ValueError("La matriz debe ser de tamaño 6x6 o 9x9.")
 
-    # Crear la matriz aumentada A|I|b
-    A_aug = np.hstack((A, np.eye(n), b.reshape(-1, 1)))
+    # Crear la matriz aumentada A|I
+    A_aug = np.hstack((A, np.eye(n)))
     steps = []
 
     def get_block(matrix, row, col, block_size=block_size):
@@ -41,28 +40,29 @@ def gauss_jordan_partitioned(A, b):
             if i != k:
                 factor = get_block(A_aug, i, k)
 
-                # Guardar la copia antes de la eliminación para el paso
-                prev_block = A_aug[i*block_size:(i+1)*block_size, :].copy()
-
                 # Realizar la eliminación
                 A_aug[i*block_size:(i+1)*block_size, :] -= factor @ A_aug[k*block_size:(k+1)*block_size, :]
 
-                # Construir la descripción en forma de operación elemental
-                step_description = f"R{i+1} -> R{i+1} - ({factor}) * R{k+1}"
+                # Construir la descripción en forma de notación de bloques
+                step_description = (
+                    f"R{i+1} -> R{i+1} - A_{i+1}{k+1} * R{k+1}"
+                )
                 steps.append({
                     "matrix": A_aug.copy(),
                     "description": step_description
                 })
 
-    # La columna más a la derecha de A_aug contiene la solución
-    solution = A_aug[:, -1]
-
     # Las columnas intermedias de A_aug contienen la matriz inversa
-    inverse_matrix = A_aug[:, n:2*n]
+    inverse_matrix = A_aug[:, n:]
+
+    # Usar la matriz inversa para resolver el sistema
+    solution = inverse_matrix @ b
 
     # Comprobación Ax = b
-    b_computed = np.dot(A, solution)
+    b_computed = A @ solution
     if not np.allclose(b_computed, b):
         print("Advertencia: La comprobación Ax != b")
+        print("b_computed:", b_computed)
+        print("b_original:", b)
 
     return solution, steps, inverse_matrix
