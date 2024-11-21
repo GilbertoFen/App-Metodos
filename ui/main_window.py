@@ -45,7 +45,8 @@ class MainWindow(QMainWindow):
         self.title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.title_label.setContentsMargins(5,5,5,0)
         title_container.addWidget(self.title_label)
-        main_layout.addLayout(title_container) #Metodo que añade widgets a el contenedor
+        #Metodo que añade widgets a el contenedor
+        main_layout.addLayout(title_container) 
 
         #2do elemento
         description_container = QHBoxLayout()
@@ -85,7 +86,7 @@ class MainWindow(QMainWindow):
         bottom_container.setLayout(option_layout)
         main_layout.addWidget(bottom_container)
 
-    #Metodo para conectar los eventos en las opciones
+    # Metodo para conectar los eventos en las opciones
     def handle_button_click(self):
         sender = self.sender()
         if sender.text() == "Método de la Secante":
@@ -101,13 +102,13 @@ class MainWindow(QMainWindow):
 
 
     def open_secant_method(self):
-        #Crea una ventana de secante
+        # Crea una ventana de secante
         self.secant_window = SecantMethodWindow(self)
 
-        #Establecemos el widget principal como la secante
+        # Establecemos el widget principal como la secante
         self.setCentralWidget(self.secant_window)
 
-        #Boton para ir al inicio
+        # Boton para ir al inicio
         back_button = QPushButton("Volver al Inicio", self.secant_window)
         back_button.setObjectName("backButton")
         back_button.clicked.connect(lambda: (
