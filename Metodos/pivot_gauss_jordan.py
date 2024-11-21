@@ -45,7 +45,7 @@ def pivoteo_parcial(A, b):
 
         steps.append({
             "description": f"Ecuación despejada para x{i+1}: {equation}",
-            "matrix": None  # No se incluye la matriz aquí
+            "matrix": None 
         })
     return x, steps
 
@@ -53,7 +53,8 @@ def pivoteo_parcial(A, b):
 
 def pivoteo_total(A, b):
     n = A.shape[0]
-    A_aug = np.hstack((A, b.reshape(-1, 1)))  # Matriz aumentada A|b
+    # Matriz aumentada A|b
+    A_aug = np.hstack((A, b.reshape(-1, 1)))  
     orden_columnas = list(range(n))
     steps = []
 
@@ -99,7 +100,7 @@ def pivoteo_total(A, b):
 
         steps.append({
             "description": f"Ecuación despejada para x{i+1}: {equation}",
-            "matrix": None  # No se incluye la matriz aquí
+            "matrix": None 
         })
 
     # Reordenar el vector solución de acuerdo con el intercambio de columnas
@@ -115,7 +116,8 @@ def pivoteo_escalonado(A, b):
 
     n = A.shape[0]
     A_aug = np.hstack((A, b.reshape(-1, 1)))
-    escala = np.max(abs(A), axis=1)  # Vector de escalas
+     # Vector de escalas
+    escala = np.max(abs(A), axis=1) 
     steps = []
 
     # Eliminación escalonada
@@ -160,7 +162,7 @@ def pivoteo_escalonado(A, b):
 
         steps.append({
             "description": f"Ecuación despejada para x{i+1}: {equation}",
-            "matrix": None  # No se incluye la matriz aquí
+            "matrix": None 
         })
 
     return x, A_aug, steps
