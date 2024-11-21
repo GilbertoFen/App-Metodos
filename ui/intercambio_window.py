@@ -12,14 +12,14 @@ class IntercambioMethodWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        # Crear un área de scroll para toda la ventana
+        # Crear un area de scroll para toda la ventana
         scroll_area = QScrollArea(self)
         scroll_area.setWidgetResizable(True)
 
-        # Widget contenedor para el área de scroll
+        # Widget contenedor para el area de scroll
         scroll_content = QWidget()
         scroll_layout = QVBoxLayout(scroll_content)
-        # Título del método
+        # Título del metodo
         self.label = QLabel("Método de Intercambio", self)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         scroll_layout.addWidget(self.label)
@@ -40,7 +40,7 @@ class IntercambioMethodWindow(QWidget):
         self.matrix_widget = MatrixInputWidget()
         scroll_layout.addWidget(self.matrix_widget)
 
-        # Botón para ejecutar el método de intercambio
+        # Boton para ejecutar el método de intercambio
         self.calculate_button = QPushButton("Calcular", self)
         self.calculate_button.setObjectName("actionButton")
         self.calculate_button.clicked.connect(self.run_intercambio)
@@ -52,7 +52,7 @@ class IntercambioMethodWindow(QWidget):
         self.results_display.setWordWrap(True)
         self.results_display.setStyleSheet("padding: 10px;")
 
-        # Añadir el QLabel a un área de scroll para los resultados
+        # Añadir el QLabel a un area de scroll para los resultados
         results_scroll_area = QScrollArea()
         results_scroll_area.setWidgetResizable(True)
         results_scroll_area.setWidget(self.results_display)
@@ -70,7 +70,7 @@ class IntercambioMethodWindow(QWidget):
         self.setLayout(main_layout)
 
     def run_intercambio(self):
-        #Metodo de la clase de input de matrices
+        # Metodo de la clase de input de matrices
         A, b = self.matrix_widget.get_matrix_and_vector()
         if A is not None and b is not None:
             try:
