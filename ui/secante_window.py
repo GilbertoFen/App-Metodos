@@ -41,7 +41,7 @@ class SecantMethodWindow(QWidget):
         # Campo para ingresar la funcion
         self.function_input = QLineEdit(self)
         self.function_input.setPlaceholderText("Ingresa una función (e.g., x**2 + 2*x + 3)")
-        self.function_input.textChanged.connect(self.auto_plot_function)  # Conectar aquí
+        self.function_input.textChanged.connect(self.auto_plot_function)
         scroll_layout.addWidget(self.function_input)
 
         # Campo para ingresar el intervalo
@@ -129,10 +129,7 @@ class SecantMethodWindow(QWidget):
             # Establecemos la variable que leera sympy
             x = sp.symbols('x')
             func = sp.sympify(function_text)
-            """ 
-            lambdify hace que f sea una funcion, recibe nuestra variable, la funcion transformada 
-            en algebraica y modules=["numpy"] permite que usemos funciones como sen,cos,e 
-            """
+        
             f = sp.lambdify(x, func, modules=["numpy"])
 
             if np.isinf(f(a)) or np.isinf(f(b)) or np.isnan(f(a)) or np.isnan(f(b)):
