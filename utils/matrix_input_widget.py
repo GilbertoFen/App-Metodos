@@ -47,7 +47,6 @@ class MatrixInputWidget(QWidget):
         self.create_inputs()
 
     def create_inputs(self):
-        """ Crea los campos de entrada para la matriz y el vector. """
         self.clear_inputs()
 
         try:
@@ -69,7 +68,6 @@ class MatrixInputWidget(QWidget):
             print(f"Error al crear los inputs: {e}")
 
     def clear_inputs(self):
-        """ Limpia los widgets anteriores de la matriz y el vector. """
         for i in reversed(range(self.matrix_container.count())):
             widget = self.matrix_container.itemAt(i).widget()
             if widget:
@@ -81,7 +79,6 @@ class MatrixInputWidget(QWidget):
                 widget.deleteLater()
 
     def get_matrix_and_vector(self):
-        """ Obtiene los valores ingresados por el usuario en la matriz y el vector. """
         try:
             A = np.zeros((self.matrix_size, self.matrix_size))
             b = np.zeros(self.matrix_size)
@@ -110,12 +107,10 @@ class MatrixInputWidget(QWidget):
             return None, None
 
     def add_row_column(self):
-        """ Agrega una fila y una columna. """
         self.matrix_size += 1
         self.create_inputs()
 
     def remove_row_column(self):
-        """ Elimina una fila y una columna si el tamaño es mayor que 2. """
         if self.matrix_size > 2:
             self.matrix_size -= 1
             self.create_inputs()
