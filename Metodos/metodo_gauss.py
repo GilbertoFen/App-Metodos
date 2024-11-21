@@ -1,15 +1,10 @@
 import numpy as np
 
 def eliminacion_gaussiana(A, b):
-    """
-    Método de Eliminación Gaussiana para resolver el sistema Ax = b.
-    Devuelve la solución x, así como los pasos realizados.
-    """
     n = len(b)
     A_aug = np.hstack((A, b.reshape(-1, 1)))
     steps = []
 
-    # Eliminación hacia adelante para convertir A en una matriz triangular superior
     for i in range(n):
         # Encontrar el pivote máximo en la columna actual
         max_row = np.argmax(abs(A_aug[i:, i])) + i
