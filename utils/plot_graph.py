@@ -9,9 +9,10 @@ class SecantPlotCanvas(FigureCanvas):
         super(SecantPlotCanvas, self).__init__(self.fig)
 
     def plot(self, f, a=None, b=None, iterations=None):
-        self.ax.clear()  # Limpiar el gráfico anterior
+        self.ax.clear() 
+        # Limpiar el gráfico anterior
 
-        # Rango de x: usar `a` y `b` si se proporcionan, de lo contrario usar predeterminado
+        # Rango de x a y b si se ingresan de lo contrario usar predeterminado
         if a is not None and b is not None:
             x_vals = np.linspace(a, b, 400)
         else:
@@ -27,7 +28,8 @@ class SecantPlotCanvas(FigureCanvas):
         self.ax.axhline(0, color="black", linestyle="--", linewidth=0.8)
 
         if iterations:
-            root = iterations[-1][2]  # Raíz aproximada
+            root = iterations[-1][2]  
+            # Raíz aproximada
             self.ax.axvline(root, color='g', linestyle='--', label=f"Raíz: {root:.6f}")
 
         self.ax.set_title("Gráfica de la función")
