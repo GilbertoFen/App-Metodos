@@ -16,7 +16,7 @@ def secant_method(f, a, b, tol=1e-6, max_iter=100):
             if (f_x1 - f_x0) == 0:
                 raise ZeroDivisionError("Diferencia entre f(x1) y f(x0) es cero, no se puede continuar")
 
-            # Método de la secante
+            # Método de la secante para obtener el xn
             xn = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0)
 
             # Calcular f(xn)
