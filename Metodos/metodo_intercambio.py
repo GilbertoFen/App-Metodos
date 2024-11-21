@@ -4,13 +4,13 @@ def metodo_intercambio(A, b, precision=12):
     n = len(A)
     matrices_intermedias = []
 
-    # Inicializamos la matriz aumentada A|b
+    # Matriz aumentada A|b
     A_aug = np.copy(A)
     b_original = np.copy(b)
     orden_filas = list(range(n))
     orden_columnas = list(range(n))
 
-    # Realizamos el método de intercambio para obtener una matriz desacomodada
+    # Realizamos el método de intercambio 
     for k in range(n):
         max_element = 0
         pivote_fila, pivote_columna = None, None
