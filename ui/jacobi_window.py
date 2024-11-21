@@ -12,15 +12,15 @@ class JacobiMethodWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        # Crear un área de scroll para toda la ventana
+        # Crear un area de scroll para toda la ventana
         scroll_area = QScrollArea(self)
         scroll_area.setWidgetResizable(True)
 
-        # Widget contenedor para el área de scroll
+        # Widget contenedor para el area de scroll
         scroll_content = QWidget()
         scroll_layout = QVBoxLayout(scroll_content)
 
-        # Título del método
+        # Titulo del método
         self.label = QLabel("Método de Jacobi", self)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         scroll_layout.addWidget(self.label)
@@ -43,18 +43,18 @@ class JacobiMethodWindow(QWidget):
         self.matrix_inputs = MatrixInputWidget()
         scroll_layout.addWidget(self.matrix_inputs)
 
-        # Botón para calcular
+        # Boton para calcular
         self.calculate_button = QPushButton("Calcular", self)
         self.calculate_button.clicked.connect(self.run_jacobi)
         self.calculate_button.setObjectName("actionButton")
         scroll_layout.addWidget(self.calculate_button)
 
-        # Contenedor para los resultados con su propio área de scroll
+        # Contenedor para los resultados con su propio area de scroll
         self.results_display = QLabel()
         self.results_display.setWordWrap(True)
         self.results_display.setStyleSheet("padding: 10px;")
 
-        # Área de scroll para los resultados
+        # Area de scroll para los resultados
         results_scroll_area = QScrollArea()
         results_scroll_area.setWidgetResizable(True)
         results_scroll_area.setWidget(self.results_display)
@@ -63,7 +63,7 @@ class JacobiMethodWindow(QWidget):
         results_scroll_area.setMinimumHeight(400)
         scroll_layout.addWidget(results_scroll_area)
 
-        # Asignar el contenido al área de scroll principal
+        # Asignar el contenido al area de scroll principal
         scroll_area.setWidget(scroll_content)
 
         # Layout principal para la ventana
@@ -76,7 +76,7 @@ class JacobiMethodWindow(QWidget):
             A, b = self.matrix_inputs.get_matrix_and_vector()
 
 
-            # Ejecutar el método de Jacobi
+            # Ejecutar el metodo de Jacobi
             result, steps, spectral_radius, T, equations, Ax = jacobi(A, b)
 
             if spectral_radius >= 1:
