@@ -13,11 +13,11 @@ class SecantMethodWindow(QWidget):
         self.table_visible = False
 
     def initUI(self):
-        # Crear un área de scroll para toda la ventana
+        # Crear un area de scroll para toda la ventana
         scroll_area = QScrollArea(self)
         scroll_area.setWidgetResizable(True)
 
-        # Widget contenedor para el área de scroll
+        # Widget contenedor para el area de scroll
         scroll_content = QWidget()
         scroll_layout = QVBoxLayout(scroll_content)
 
@@ -33,12 +33,12 @@ class SecantMethodWindow(QWidget):
         description_label.setWordWrap(True)
         scroll_layout.addWidget(description_label)
 
-        # Título
+        # Titulo
         self.label = QLabel("Método de la secante")
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         scroll_layout.addWidget(self.label)
 
-        # Campo para ingresar la función
+        # Campo para ingresar la funcion
         self.function_input = QLineEdit(self)
         self.function_input.setPlaceholderText("Ingresa una función (e.g., x**2 + 2*x + 3)")
         self.function_input.textChanged.connect(self.auto_plot_function)  # Conectar aquí
@@ -59,17 +59,17 @@ class SecantMethodWindow(QWidget):
 
         scroll_layout.addLayout(interval_layout)
 
-        # Botón para graficar la función
+        # Boton para graficar la funcion
         self.graph_button = QPushButton("Graficar función", self)
         self.graph_button.clicked.connect(self.plot_function)
         scroll_layout.addWidget(self.graph_button)
 
-        # Botón para ver la tabla de iteraciones
+        # Boton para ver la tabla de iteraciones
         self.iterations_button = QPushButton("Ver tabla de iteraciones", self)
         self.iterations_button.clicked.connect(self.toggle_iterations)
         scroll_layout.addWidget(self.iterations_button)
 
-        # Campo para la gráfica
+        # Campo para la grafica
         self.canvas = SecantPlotCanvas(self, width=5, height=4)
         scroll_layout.addWidget(self.canvas)
 
@@ -80,7 +80,7 @@ class SecantMethodWindow(QWidget):
         self.iterations_table.setVisible(False)
         scroll_layout.addWidget(self.iterations_table)
 
-        # Asignar el contenido al área de scroll
+        # Asignar el contenido al area de scroll
         scroll_area.setWidget(scroll_content)
 
         # Layout principal para la ventana
@@ -88,18 +88,16 @@ class SecantMethodWindow(QWidget):
         main_layout.addWidget(scroll_area)
         self.setLayout(main_layout)
 
+    # Metodo para graficar la funcion desde que se introduce un input  
     def auto_plot_function(self):
-        """
-        Intenta graficar la función automáticamente al escribir en el input.
-        """
         try:
             function_text = self.function_input.text()
 
-            # Validar si el texto no está vacío
+            # Validar si el texto no esta vacío
             if not function_text.strip():
                 return
 
-            # Convertir el texto a una función válida de SymPy
+            # Convertir el texto a una función valida de sympy
             x = sp.symbols('x')
             func = sp.sympify(function_text)
             f = sp.lambdify(x, func, modules=["numpy"])
@@ -109,14 +107,14 @@ class SecantMethodWindow(QWidget):
             x_vals = np.linspace(x_min, x_max, 400)
             y_vals = f(x_vals)
 
-            # Verificar si hay valores inválidos (NaN o Inf)
+            # Verificar si hay valores invalidos 
             if np.any(np.isnan(y_vals)) or np.any(np.isinf(y_vals)):
                 raise ValueError("La función contiene valores inválidos en el rango seleccionado.")
 
-            # Graficar la función automáticamente
+            # Graficar la funcion automáticamente
             self.canvas.plot(f)
         except Exception as e:
-            # Manejar errores sin detener la aplicación
+            # Manejar errores sin detener la aplicacion
             self.canvas.ax.clear()
             self.canvas.ax.text(0.5, 0.5, f"Error: {str(e)}",
                                 ha='center', va='center', transform=self.canvas.ax.transAxes, color='red')
