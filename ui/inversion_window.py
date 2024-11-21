@@ -14,20 +14,20 @@ class InversionWindow(QWidget):
         self.initUI()
 
     def initUI(self):
-        # Crear el área de scroll
+        # Crear el area de scroll
         scroll_area = QScrollArea(self)
         scroll_area.setWidgetResizable(True)
         scroll_content = QWidget()
         scroll_area.setWidget(scroll_content)
 
-        # Layout principal dentro del área de scroll
+        # Layout principal dentro del area de scroll
         main_layout = QVBoxLayout(scroll_content)
-        # Título centrado
+        # Titulo centrado
         self.label = QLabel("Inversión de Matrices - Gauss Jordan Particionado", self)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(self.label)
 
-        # Descripción del método
+        # Descripcion del método
         description_label = QLabel("Gauss-Jordan: El método de Gauss-Jordan es una técnica para encontrar la inversa de una matriz cuadrada y resolver sistemas de ecuaciones lineales. "
                                    "El enfoque consiste en transformar la matriz original 𝐴  en la matriz identidad 𝐼  utilizando operaciones elementales de matrices. Durante este proceso, una matriz identidad adjunta a la "
                                    "derecha se transforma en la inversa de 𝐴.\nGauss-Jordan Particionado: Divide la matriz en bloques más pequeños (usualmente 3x3)"
@@ -95,7 +95,7 @@ class InversionWindow(QWidget):
             if A is None or b is None:
                 raise ValueError("Por favor, complete todos los campos")
 
-            # Resolver usando Gauss-Jordan particionado
+            # Resolver usando Gauss Jordan particionado
             x, steps, inverse = gauss_jordan_partitioned(A, b)
             html_steps = self.generate_html_steps(steps, solution=x, inverse=inverse)
             self.steps_display.setHtml(html_steps)
@@ -106,15 +106,15 @@ class InversionWindow(QWidget):
     def generate_html_steps(self, steps, solution=None, inverse=None):
         html_content = steps_to_html(steps)
 
-        # Mostrar la matriz inversa final si está disponible
+        # Mostrar la matriz inversa final si esta disponible
         if inverse is not None:
             html_content += matrix_to_html_table(inverse, "Matriz Inversa Final")
 
-        # Mostrar el vector solución final si está disponible
+        # Mostrar el vector solución final si esta disponible
         if solution is not None:
             html_content += vector_to_html_table(solution, "Vector Solución Final")
 
-        # Comprobación Ax = b
+        # Comprobacion Ax = b
         A, b = self.matrix_widget.get_matrix_and_vector()
         if A is not None and b is not None and solution is not None:
             b_computed = A @ solution
