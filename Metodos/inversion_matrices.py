@@ -43,7 +43,7 @@ def gauss_jordan_partitioned(A, b):
                 # Realizar la eliminación
                 A_aug[i*block_size:(i+1)*block_size, :] -= factor @ A_aug[k*block_size:(k+1)*block_size, :]
 
-                # Construir la descripción en forma de notación de bloques
+                # Descripcion 
                 step_description = (
                     f"R{i+1} -> R{i+1} - A_{i+1}{k+1} * R{k+1}"
                 )
@@ -52,7 +52,7 @@ def gauss_jordan_partitioned(A, b):
                     "description": step_description
                 })
 
-    # Las columnas intermedias de A_aug contienen la matriz inversa
+    # Matriz inversa 
     inverse_matrix = A_aug[:, n:]
 
     # Usar la matriz inversa para resolver el sistema
