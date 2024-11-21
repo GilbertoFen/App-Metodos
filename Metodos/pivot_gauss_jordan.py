@@ -1,7 +1,5 @@
 import numpy as np
 
-import numpy as np
-
 def pivoteo_parcial(A, b):
     n = A.shape[0]
     A_aug = np.hstack((A, b.reshape(-1, 1)))
