@@ -5,7 +5,7 @@ def gauss_jordan(A):
     A_aug = np.hstack((A, np.eye(n)))
     steps = []
 
-    # Aplicar el método de Gauss-Jordan
+    # Aplicar el método de Gauss Jordan
     for i in range(n):
         pivot = A_aug[i, i]
         if pivot == 0:
@@ -35,7 +35,7 @@ def gauss_jordan(A):
                     "description": step_description
                 })
 
-    # La matriz inversa es la parte derecha de A_aug
+    # La matriz inversa 
     A_inv = A_aug[:, n:]
 
     return A_inv, steps
