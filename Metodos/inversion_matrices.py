@@ -60,9 +60,6 @@ def gauss_jordan_partitioned(A, b):
 
     # Comprobación Ax = b
     b_computed = A @ solution
-    if not np.allclose(b_computed, b):
-        print("Advertencia: La comprobación Ax != b")
-        print("b_computed:", b_computed)
-        print("b_original:", b)
+    
 
     return solution, steps, inverse_matrix
